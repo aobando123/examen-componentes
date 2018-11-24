@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</head>
+<body>
+<header> 
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		  <a class="navbar-brand" href="#">Examen</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarNav">
+		    <ul class="navbar-nav">
+		      <li class="nav-item ">
+		        <a class="nav-link" href="/">Productores <span class="sr-only">(current)</span></a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="/finca">Fincas</a>
+		      </li>
+		      <li class="nav-item active">
+		        <a class="nav-link" href="/cafe">Agregar Cafe</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link " href="/buscar">Buscar Productores</a>
+		      </li>
+		    </ul>
+		  </div>
+		</nav>
+	</header>
+<main class="container">
+	<h2>Agregar cafe</h2>
+		<form action="#" th:action="@{/cafe}" th:object="${cafe}" method="post">
+
+		  <div class="form-group">
+		    <label for="nombre">Nombre del cafe</label>
+		    <input th:field="*{nombre}" type="text" class="form-control" id="nombre" aria-describedby="emailHelp" placeholder="Digite el nombre del cafe a agregar">		  </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="finca">Seleccione Finca</label>
+		    <select th:field="*{id}" class="form-control" id="finca">
+		      <option  th:each="entry,status : ${fincas}"  th:value="${entry.IdFinca}" th:text="${ entry.nombre + ' ' + '(' +  entry.dueno.nombre + ')'}">1</option>
+		    </select>
+		  </div>
+		  <button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+</main>
+		
+</body>
+</html>

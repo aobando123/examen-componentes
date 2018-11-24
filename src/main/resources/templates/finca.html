@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</head>
+<body>
+<header> 
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		  <a class="navbar-brand" href="#">Examen</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarNav">
+		    <ul class="navbar-nav">
+		      <li class="nav-item ">
+		        <a class="nav-link" href="/">Productores <span class="sr-only">(current)</span></a>
+		      </li>
+		      <li class="nav-item active">
+		        <a class="nav-link" href="/finca">Fincas</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="/cafe">Agregar Cafe</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link " href="/buscar">Buscar Productores</a>
+		      </li>
+		    </ul>
+		  </div>
+		</nav>
+	</header>
+<main class="container">
+		<h2>Crear Finca</h2>
+		<form action="#" th:action="@{/finca}" th:object="${finca}" method="post">
+
+		  <div class="form-group">
+		    <label for="nombre">Nombre de la finca</label>
+		    <input th:field="*{nombre}" type="text" class="form-control" id="nombre" aria-describedby="emailHelp" placeholder="Digite el nombre de la finca">
+		   </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="selectProductor">Seleccione Productor</label>
+		       <select th:field="*{dueno.cedula}"  id="inputState" class="form-control">
+		          <option   th:each="productor,status : ${productores}" th:value="${productor.cedula}" th:text="${productor.nombre}">1</option>
+		      </select>
+		  </div>
+		  <button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+		<h2> Tabla de fincas</h2>
+	<table class="table">
+	  <thead >
+	 	<tr>
+	      <th scope="col">Finca</th>
+	      <th scope="col">Productor</th>
+	      <th scope="col">Cafes ofrecidos</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr th:each="entry,status : ${fincas}">
+	      <td  th:text="${entry.nombre}"scope="col">nombre</th>
+	      <td th:text="${entry.dueno.nombre}" scope="col">Productor</th>
+	      <td scope="col"><span  th:each="cafe,status : ${entry.siembra}" th:text="${cafe.nombre +',' + ' '}" ></span></th>
+	    </tr>
+	   
+	  </tbody>
+	</table>
+</body>
+</html>
